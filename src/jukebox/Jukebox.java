@@ -5,6 +5,9 @@ package jukebox;
  */
 
 
+import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,7 +15,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -20,15 +26,38 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
+public class Jukebox implements Runnable, MouseListener {
 
-    public void run() {
+    private Component jbutton2;
+    JButton jbutton= new JButton("Rock Music");
+    JButton jbutton3= new JButton("Classic Music");
+
+	public void run() {
 
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
 
 		// 3. Play the Song
-
+    	
+    	JFrame jframe= new JFrame("Jukebox");
+    	JLabel jlabel= new JLabel("Choose your favorite one");
+    	JPanel jpanel= new JPanel();
+ 
+    
+    jbutton.setSize(200, 200);
+    jbutton3.setSize(200, 200);
+    	jpanel.add(jlabel);
+     jpanel.add(jbutton3);
+     jpanel.add(jbutton);
+    jbutton.addMouseListener(this);	
+    jbutton3.addMouseListener(this);
+    
+    
+    	jframe.add(jpanel);
+    	jframe.setSize(800, 800);
+    	jframe.setVisible(true);
+    	
+    	
 		/*
 		 * 4. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -44,6 +73,47 @@ public class Jukebox implements Runnable {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	     	Song song= new Song("425556__planetronik__rock-808-beat.mp3");
+     	  Song song2=  new Song("262258__gowlermusic__classical-suspense.wav");
+	if(e.getSource()==jbutton) {
+		 song.play();
+	}
+	else if(e.getSource()==jbutton3) {
+		song2.play();
+	}
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

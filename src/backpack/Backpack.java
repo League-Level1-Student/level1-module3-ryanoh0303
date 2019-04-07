@@ -8,7 +8,8 @@ public class Backpack {
 	private Pencil pencil;
 	private Ruler ruler;
 	private Textbook textbook;
-
+	
+	
 	public void packAndCheck() {
 		// Your mission is to go to school.
 		// 1. First you need to put all your supplies into your backpack - use
@@ -47,6 +48,7 @@ public class Backpack {
 
 	public void goToSchool() {
 		if (pencil == null || ruler == null || textbook == null) {
+			
 			System.out.println("ERROR: You are not ready for School!");
 		} else {
 			System.out.println("Congratulations! You are ready for school");
