@@ -31,6 +31,8 @@ public class Jukebox implements Runnable, MouseListener {
     private Component jbutton2;
     JButton jbutton= new JButton("Rock Music");
     JButton jbutton3= new JButton("Classic Music");
+ 	Song song= new Song("425556__planetronik__rock-808-beat.mp3");
+	  Song song2=  new Song("classic.mp3");
 
 	public void run() {
 
@@ -42,10 +44,12 @@ public class Jukebox implements Runnable, MouseListener {
     	JFrame jframe= new JFrame("Jukebox");
     	JLabel jlabel= new JLabel("Choose your favorite one");
     	JPanel jpanel= new JPanel();
- 
-    
+     JLabel image= loadImage("images.png");
+     JLabel image2= loadImage("download.jpeg");
     jbutton.setSize(200, 200);
+    jbutton.add(image);
     jbutton3.setSize(200, 200);
+    jbutton3.add(image2);
     	jpanel.add(jlabel);
      jpanel.add(jbutton3);
      jpanel.add(jbutton);
@@ -74,7 +78,7 @@ public class Jukebox implements Runnable, MouseListener {
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
 	}
-
+     
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -85,13 +89,22 @@ public class Jukebox implements Runnable, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-	     	Song song= new Song("425556__planetronik__rock-808-beat.mp3");
-     	  Song song2=  new Song("262258__gowlermusic__classical-suspense.wav");
+	
 	if(e.getSource()==jbutton) {
+		 song2.stop();
+		 song.stop();
 		 song.play();
+		 System.out.println("button1");
 	}
 	else if(e.getSource()==jbutton3) {
+		song.stop();
+		song2.stop();
 		song2.play();
+		System.out.println("button3clicked");
+	}
+	else {
+		song.stop();
+		song2.stop();
 	}
 	}
 

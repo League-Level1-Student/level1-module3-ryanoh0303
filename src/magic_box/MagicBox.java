@@ -5,6 +5,7 @@ package magic_box;
  */
 
 
+import java.applet.AudioClip;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -15,11 +16,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class MagicBox extends JPanel implements Runnable, MouseListener {
-
+        
+	MediaPalace media= new MediaPalace();
+	JFrame frame = new JFrame("The Magic Box contains many secrets...");
 	/*
 	 * We are going to hide secrets within the magic box. 
 	 * When the user clicks on a secret place, stuff will happen.
@@ -33,9 +37,10 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	 *    or the color of the image, then decide what action the Media Palace should take in each case. 
 	 *     backgroundImage.getRGB(e.getX(), e.getY()) will give you the color of the current pixel.
 	 */
-
+	 AudioClip song2= media.loadSound("hello.wav");
+    AudioClip song3= media.loadSound("262258__gowlermusic__classical.wav");
 	BufferedImage backgroundImage;
-
+    AudioClip song= media.loadSound("425556__planetronik__rock-808-beat.mp3");
 
 	@Override
 	public void run() {
@@ -48,7 +53,8 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	}
 
 	private void createUI() {
-		JFrame frame = new JFrame("The Magic Box contains many secrets...");
+		
+		frame.addMouseListener(this);
 		frame.add(this);
 		setPreferredSize(new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight()));
 		frame.pack();
@@ -72,8 +78,17 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+ 	 
+		 System.out.println(e.getX()+", "+e.getY());
+         if(e.getX()>100 && e.getX()<200 && e.getY()>(200) && e.getY()<400) {
+            song2.play();
+         }
+         else if(e.getX()>700) {
+        	     song3.play();
+         }
+         else {
+        		media.speak("CLICKED!");
+         }
 	}
 
 	@Override
