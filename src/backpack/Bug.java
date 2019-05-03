@@ -11,8 +11,9 @@ public class Bug {
 	JLabel image= loadImage("download.jpeg");
 	
 	public Bug() {
-	   this.image= image;
 		
+		
+	 
 	}
 	public Bug(Color bugColor) {
 		
@@ -23,10 +24,10 @@ public class Bug {
 	public void setColor() {
 		
 	}
+	
 	private JLabel loadImage(String fileName) {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
 	}
-     
 }
